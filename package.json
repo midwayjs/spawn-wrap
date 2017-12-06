@@ -19,14 +19,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/isaacs/spawn-wrap.git"
+    "url": "git+https://github.com/midwayjs/spawn-wrap.git"
   },
-  "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me/)",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/isaacs/spawn-wrap/issues"
+    "url": "https://github.com/midwayjs/spawn-wrap/issues"
   },
-  "homepage": "https://github.com/isaacs/spawn-wrap#readme",
+  "homepage": "https://github.com/midwayjs/spawn-wrap",
   "devDependencies": {
     "signal-exit": "^3.0.2",
     "tap": "^10.7.3"
