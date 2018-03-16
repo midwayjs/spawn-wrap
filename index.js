@@ -124,7 +124,7 @@ function mungeSh (workingDir, options) {
     options.originalNode = command
     c = match[1] + match[2] + ' "' + workingDir + '/node" ' + match[3]
     options.args[cmdi + 1] = c
-  } else if (exe === 'npm' && !isWindows && !process.PANDORA_DO_NOT_FOLLOW_NPM) {
+  } else if (exe === 'npm' && !isWindows && !process.env.PANDORA_DO_NOT_FOLLOW_NPM) {
     // XXX this will exhibit weird behavior when using /path/to/npm,
     // if some other npm is first in the path.
     var npmPath = whichOrUndefined('npm')
@@ -164,7 +164,7 @@ function mungeCmd (workingDir, options) {
     replace = m[1] + workingDir + '/node.cmd' + m[3] + m[4]
     options.args[cmdi + 1] = m[1] + m[2] + m[3] +
       ' "' + workingDir + '\\node"' + m[4]
-  } else {
+  } else if(!process.env.PANDORA_DO_NOT_FOLLOW_NPM) {
     // XXX probably not a good idea to rewrite to the first npm in the
     // path if it's a full path to npm.  And if it's not a full path to
     // npm, then the dirname will not work properly!
@@ -323,7 +323,7 @@ function munge (workingDir, options) {
     mungeCmd(workingDir, options)
   } else if (isNode(options.basename)) {
     mungeNode(workingDir, options)
-  } else if (isnpm(options.basename)) {
+  } else if (isnpm(options.basename) && !process.env.PANDORA_DO_NOT_FOLLOW_NPM) {
     // XXX unnecessary?  on non-windows, npm is just another shebang
     mungenpm(workingDir, options)
   } else {
