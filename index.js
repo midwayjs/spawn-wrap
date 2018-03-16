@@ -326,7 +326,7 @@ function munge (workingDir, options) {
   } else if (isnpm(options.basename) && !process.env.PANDORA_DO_NOT_FOLLOW_NPM) {
     // XXX unnecessary?  on non-windows, npm is just another shebang
     mungenpm(workingDir, options)
-  } else {
+  } else if (!process.env.PANDORA_DO_NOT_FOLLOW_SHEBANG) {
     mungeShebang(workingDir, options)
   }
 
