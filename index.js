@@ -10,7 +10,6 @@ var crypto = require('crypto')
 var mkdirp = require('mkdirp')
 var rimraf = require('rimraf')
 var path = require('path')
-var signalExit = require('signal-exit')
 var home = process.env.SPAWN_WRAP_SHIM_ROOT || require('os-homedir')()
 var homedir = home + '/.pandora-tmp-cache/.node-spawn-wrap-'
 var which = require('which')
@@ -398,8 +397,7 @@ function setup (argv, env) {
   var settings = JSON.stringify({
     module: __filename,
     deps: {
-      foregroundChild: require.resolve('foreground-child'),
-      signalExit: require.resolve('signal-exit'),
+      foregroundChild: require.resolve('foreground-child')
     },
     key: key,
     workingDir: workingDir,
@@ -408,11 +406,6 @@ function setup (argv, env) {
     env: env,
     root: process.pid
   }, null, 2) + '\n'
-
-  signalExit(function () {
-    if (!doDebug)
-      rimraf.sync(workingDir)
-  })
 
   mkdirp.sync(workingDir)
   workingDir = fs.realpathSync(workingDir)
